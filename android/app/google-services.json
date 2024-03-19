@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "797751227019",
+    "project_id": "unibank-c7dac",
+    "storage_bucket": "unibank-c7dac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797751227019:android:7864bb22ab224fe5e1da8e",
+        "android_client_info": {
+          "package_name": "com.example.unibank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVAigVWlkG3rgzzoJxUqR32Mp2Vl0EBLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
