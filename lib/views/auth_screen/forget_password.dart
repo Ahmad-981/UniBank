@@ -1,9 +1,7 @@
 // import 'package:emart_app/consts/lists.dart';
 // import 'package:emart_app/views/auth_screen/signup_screen.dart';
 // import 'package:emart_app/views/home_screen/home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unibank/consts/firebase_const.dart';
-import 'package:unibank/views/auth_screen/forget_password.dart';
+import 'package:unibank/views/auth_screen/login_screen.dart';
 import 'package:unibank/views/auth_screen/signup_screen.dart';
 import 'package:unibank/views/home_screen/home.dart';
 import 'package:unibank/widgets_common/custom_text_field.dart';
@@ -18,16 +16,17 @@ import 'package:get/get.dart';
 
 //import '../home_screen/home.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   var loading = false.obs;
   var controller = Get.put(AuthController());
+  final forgetPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Center(
                 child: Column(
                   children: [
-                    (context.screenHeight * 0.1).heightBox,
+                    (context.screenHeight * 0.2).heightBox,
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -58,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     (context.screenHeight * 0.03).heightBox,
-                    "Welcome Back"
+                    "Enter your Email"
                         .text
                         .color(const Color.fromARGB(255, 94, 92, 92))
                         .semiBold
@@ -66,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         .size(17)
                         .make(),
 
-                    "Sign in to your account"
+                    "We will send you a verification link at your Email"
                         .text
                         .color(redColor)
                         .fontFamily(semibold)
@@ -78,39 +77,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             customTextField(
                                 title: email,
-                                controller: controller.emailController,
+                                controller: forgetPasswordController,
                                 obsecureText: false,
-                                icon: const Icon(Icons.email_outlined,
+                                icon: Icon(Icons.email_outlined,
                                     color: redColor)),
-                            15.heightBox,
-                            customTextField(
-                                title: password,
-                                controller: controller.passwordController,
-                                obsecureText: true,
-                                icon: const Icon(
-                                  Icons.lock_outline,
-                                  color: redColor,
-                                )),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                  onPressed: () {
-                                    Get.to(() => const ForgetPasswordScreen());
-                                  },
-                                  child: forgetPassword.text
-                                      .fontFamily(semibold)
-                                      .size(12)
-                                      .color(redColor)
-                                      .make()),
-                            ),
-                            5.heightBox,
+                            35.heightBox,
                             controller.loading.value
                                 ? const CircularProgressIndicator(
                                     valueColor:
                                         AlwaysStoppedAnimation(redColor),
                                   )
                                 : ourButton(
-                                        title: login,
+                                        title: "Send Code",
                                         color: redColor,
                                         textColor: whiteColor,
                                         onPress: () async {
@@ -118,26 +96,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                           controller.loading.value = true;
                                           try {
                                             await controller
-                                                .signIn(context: context)
+                                                .forgetPassword(
+                                                    context: context,
+                                                    email:
+                                                        forgetPasswordController
+                                                            .text)
                                                 .then((value) {
                                               if (value != null) {
                                                 VxToast.show(context,
-                                                    msg: "Login Successfully",
+                                                    msg: "Check Your Email",
                                                     showTime: 5000,
                                                     bgColor: fontGrey,
                                                     textColor: whiteColor);
-                                                Get.to(() => const Home(),
-                                                    transition: Transition
-                                                        .leftToRightWithFade);
-                                                controller.loading.value =
-                                                    false;
+                                                Get.to(
+                                                    () => const LoginScreen());
                                               } else {
+                                                Get.to(
+                                                    () => const LoginScreen());
                                                 controller.loading.value =
                                                     false;
                                               }
                                             });
                                           } catch (e) {
-                                            // ignore: use_build_context_synchronously
                                             VxToast.show(context,
                                                 msg: e.toString(),
                                                 showTime: 5000,
@@ -149,21 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     .width(context.screenWidth - 50)
                                     .make(),
                             10.heightBox,
-                            "Or".text.color(darkFontGrey).make(),
-                            10.heightBox,
-                            ourButton(
-                                    title: signup,
-                                    color: const Color.fromARGB(255, 240, 240, 240),
-                                    textColor: redColor,
-                                    onPress: () async {
-                                      Get.to(() => const SignupScreen());
-                                    })
-                                .box
-                                .shadowSm
-                                .width(context.screenWidth - 50)
-                                .make(),
                           ],
-                        ).box.padding(const EdgeInsets.all(25)).make()),
+                        ).box.padding(EdgeInsets.all(25)).make()),
                   ],
                 ),
               ),

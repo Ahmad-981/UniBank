@@ -13,7 +13,10 @@ Widget customTextField({String? title, obsecureText, controller, icon}) {
           labelText: title,
           isDense: true,
           hintText: title,
-          hintStyle: TextStyle(color: Colors.grey),
+
+          labelStyle: TextStyle(
+              color: const Color.fromARGB(255, 124, 123, 123), fontSize: 14),
+          hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15), // Set the border radius
             borderSide: BorderSide(
@@ -32,10 +35,11 @@ Widget customTextField({String? title, obsecureText, controller, icon}) {
           fillColor: whiteColor,
           filled: true,
           prefixIcon: icon,
-          suffixIcon: const Icon(
-            Icons.remove_red_eye_outlined,
-            color: redColor,
-          ),
+
+          // suffixIcon: const Icon(
+          //   Icons.remove_red_eye_outlined,
+          //   color: redColor,
+          // ),
           contentPadding: EdgeInsets.all(15),
           // focusedBorder: const OutlineInputBorder(
           //     borderSide: BorderSide(color: redColor))

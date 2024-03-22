@@ -6,7 +6,9 @@ const Color darkFontGrey = Color.fromRGBO(62, 68, 71, 1);
 const Color whiteColor = Color.fromRGBO(255, 255, 255, 1);
 const Color lightGrey = Color.fromRGBO(239, 239, 239, 1);
 
-const Color redColor = Color.fromRGBO(51, 128, 32, 1);
+//const Color redColor = Color.fromRGBO(51, 128, 32, 1);
+const Color redColor = Color.fromARGB(255, 48, 48, 48);
+const Color lightGreenColor = Color.fromRGBO(119, 219, 94, 1);
 // const Color redColor = Color.fromRGBO(4, 26, 66, 1);
 // const Color redColor = Color.fromARGB(255, 110, 24, 126);
 

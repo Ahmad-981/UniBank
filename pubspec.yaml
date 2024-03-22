@@ -38,11 +38,18 @@ dependencies:
   velocity_x: ^4.1.1
   permission_handler: ^11.3.0
   get: ^4.6.5
-  firebase_core: ^2.15.1
-  firebase_auth: ^4.9.0
-  firebase_storage: ^11.2.6
-  cloud_firestore: ^4.9.1
+ 
   image_picker: ^1.0.4
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.8
+  firebase_storage: ^11.6.9
+  cloud_firestore: ^4.15.8
+  delayed_display: ^2.0.0
+  intl: ^0.18.1
+  google_fonts: ^6.2.0
+  flutter_spinkit: ^5.2.0
+  shared_preferences: ^2.2.2
+  restart_app: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +77,20 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/fonts/
+
+  fonts:
+    - family: sans_regular
+      fonts:
+        - asset: assets/fonts/sans_regular.ttf
+    
+    - family: sans_semibold
+      fonts:
+        - asset: assets/fonts/sans_semibold.ttf
+
+    - family: sans_bold
+      fonts:
+        - asset: assets/fonts/sans_bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unibank/views/auth_screen/login_screen.dart';
+import 'package:unibank/views/transactions/add_transaction.dart';
+import 'package:unibank/views/transactions/bills/electricity.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +21,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.white, primary: Colors.white),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }

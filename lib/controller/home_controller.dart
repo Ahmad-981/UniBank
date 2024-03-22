@@ -1,32 +1,53 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
-import 'package:unibank/consts/consts.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unibank/consts/consts.dart';
+import 'package:unibank/consts/firebase_const.dart';
+
+import '../models/user_model.dart';
 
 class HomeController extends GetxController {
-  // @override
-  // void onInit() {
-  //   getUsername();
-  //   super.onInit();
-  // }
-  final homeController = TextEditingController();
+  Rx<User?> currentUser = Rx<User?>(null); // Make currentUser observable
+  RxString? amount = RxString('0');
+  @override
+  void onInit() {
+    fetchUserDataFromFirestore();
+    fetchAmountFromFirestore();
+    super.onInit();
+  }
 
+  final homeController = TextEditingController();
   var currenItemIndex = 0.obs;
   var username = '';
 
-  // getUsername() async {
-  //   var user = await fireStore
-  //       .collection(userCollection)
-  //       .where('id', isEqualTo: currentUser!.uid)
-  //       .get()
-  //       .then((value) {
-  //     if (value.docs.isEmpty) {
-  //       return "No value";
-  //     }
-  //     if (value.docs.isNotEmpty) {
-  //       return value.docs.single['name'];
-  //     }
-  //   });
-  //   username = user;
-  //   print(username);
-  // }
+  fetchUserDataFromFirestore() async {
+    try {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection(userCollection)
+          .doc(auth.currentUser!.uid)
+          .get();
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        currentUser.value = User.fromMap(data); // Assign value to currentUser
+        try {
+          DocumentSnapshot doc = await FirebaseFirestore.instance
+              .collection('transactions') // Replace with your collection name
+              .doc(currentUser.value!.phone)
+              .get();
+
+          if (doc.exists) {
+            amount!.value =
+                doc['amount']; // Assign amount to the observable variable
+          }
+        } catch (e) {
+          print('Error fetching amount from Firestore: $e');
+        }
+      }
+    } catch (e) {
+      print('Error fetching user data from Firestore: $e');
+    }
+  }
+
+  fetchAmountFromFirestore() async {}
 }

@@ -23,132 +23,164 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   var loading = false.obs;
   var controller = Get.put(AuthController());
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                // (context.screenHeight * 0.05).heightBox,
-                (context.screenHeight * 0.05).heightBox,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                "assets/images/bg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            SingleChildScrollView(
+              child: Center(
+                child: Column(
                   children: [
-                    Image.asset(
-                      "assets/images/food2.PNG",
-                      width: 200,
-                      fit: BoxFit.fill,
-                    ).box.roundedFull.clip(Clip.antiAlias).make(),
-                  ],
-                ),
-                (context.screenHeight * 0.03).heightBox,
-                "Welcome to UniBank"
-                    .text
-                    .color(const Color.fromARGB(255, 94, 92, 92))
-                    .semiBold
-                    .fontFamily(semibold)
-                    .size(17)
-                    .make(),
-
-                "Register an Account"
-                    .text
-                    .color(redColor)
-                    .fontFamily(semibold)
-                    .size(12)
-                    .semiBold
-                    .make(),
-                // 5.heightBox,
-                Obx(() => Column(
+                    // (context.screenHeight * 0.05).heightBox,
+                    (context.screenHeight * 0.05).heightBox,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        customTextField(
-                            title: email,
-                            controller: controller.emailController,
-                            obsecureText: false,
-                            icon: Icon(Icons.email_outlined, color: redColor)),
-                        15.heightBox,
-                        customTextField(
-                            title: "Phone",
-                            controller: controller.emailController,
-                            obsecureText: false,
-                            icon: Icon(Icons.call, color: redColor)),
-                        15.heightBox,
-                        customTextField(
-                          title: password,
-                          controller: controller.passwordController,
-                          obsecureText: true,
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: redColor,
-                          ),
-                        ),
-                        15.heightBox,
-                        customTextField(
-                          title: "Confirm Password",
-                          controller: controller.passwordController,
-                          obsecureText: true,
-                          icon: Icon(
-                            Icons.lock_outline,
-                            color: redColor,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: forgetPassword.text
-                                  .fontFamily(semibold)
-                                  .size(12)
-                                  .color(redColor)
-                                  .make()),
-                        ),
-                        5.heightBox,
-                        controller.loading.value
-                            ? const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(redColor),
-                              )
-                            : ourButton(
-                                    title: signup,
-                                    color: redColor,
-                                    textColor: whiteColor,
-                                    onPress: () async {
-                                      // controller.loading.value = true;
-                                      // try {
-                                      //   await controller
-                                      //       .signIn(context: context)
-                                      //       .then((value) {
-                                      //     if (value != null) {
-                                      //       VxToast.show(context,
-                                      //           msg: "Login Successfully",
-                                      //           showTime: 5000,
-                                      //           bgColor: fontGrey,
-                                      //           textColor: whiteColor);
-                                      Get.to(() => const Home());
-                                      //     } else {
-                                      //       controller.loading.value = false;
-                                      //     }
-                                      //   });
-                                      // } catch (e) {
-                                      //   VxToast.show(context,
-                                      //       msg: e.toString(),
-                                      //       showTime: 5000,
-                                      //       pdVertical: 40);
-                                      // }
-                                    })
-                                .box
-                                .shadow
-                                .width(context.screenWidth - 50)
-                                .make(),
-                        10.heightBox,
-                        "Or".text.color(darkFontGrey).make(),
-                        10.heightBox,
-                        controller.loading.value
-                            ? const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(redColor),
-                              )
-                            : ourButton(
+                        Image.asset(
+                          "assets/images/food2.PNG",
+                          width: 200,
+                          fit: BoxFit.fill,
+                        ).box.shadow.roundedFull.clip(Clip.antiAlias).make(),
+                      ],
+                    ),
+                    (context.screenHeight * 0.03).heightBox,
+                    "Welcome to UniBank"
+                        .text
+                        .color(const Color.fromARGB(255, 94, 92, 92))
+                        .semiBold
+                        .fontFamily(semibold)
+                        .size(17)
+                        .make(),
+
+                    "Register an Account"
+                        .text
+                        .color(redColor)
+                        .fontFamily(semibold)
+                        .size(12)
+                        .semiBold
+                        .make(),
+                    // 5.heightBox,
+                    Obx(() => Column(
+                          children: [
+                            customTextField(
+                                title: name,
+                                controller: nameController,
+                                obsecureText: false,
+                                icon: Icon(Icons.person, color: redColor)),
+                            15.heightBox,
+                            customTextField(
+                                title: email,
+                                controller: emailController,
+                                obsecureText: false,
+                                icon: Icon(Icons.email_outlined,
+                                    color: redColor)),
+                            15.heightBox,
+                            customTextField(
+                                title: "Phone",
+                                controller: phoneController,
+                                obsecureText: false,
+                                icon: Icon(Icons.call, color: redColor)),
+                            15.heightBox,
+                            customTextField(
+                              title: "Address",
+                              controller: addressController,
+                              obsecureText: false,
+                              icon: Icon(
+                                Icons.home_outlined,
+                                color: redColor,
+                              ),
+                            ),
+                            15.heightBox,
+                            customTextField(
+                              title: password,
+                              controller: passwordController,
+                              obsecureText: true,
+                              icon: Icon(
+                                Icons.lock_outline,
+                                color: redColor,
+                              ),
+                            ),
+                            15.heightBox,
+                            customTextField(
+                              title: "Confirm Password",
+                              controller: confirmPasswordController,
+                              obsecureText: true,
+                              icon: Icon(
+                                Icons.lock_outline,
+                                color: redColor,
+                              ),
+                            ),
+                            25.heightBox,
+                            controller.loading.value
+                                ? const CircularProgressIndicator()
+                                : ourButton(
+                                        title: signup,
+                                        color: redColor,
+                                        textColor: whiteColor,
+                                        onPress: () async {
+                                          controller.loading.value = true;
+                                          try {
+                                            await controller
+                                                .signUp(
+                                                    context: context,
+                                                    phonenumber:
+                                                        phoneController.text,
+                                                    email: emailController.text,
+                                                    password:
+                                                        passwordController.text)
+                                                .then((value) {
+                                              return controller.storageUserData(
+                                                  email: emailController.text,
+                                                  phone: phoneController.text,
+                                                  address:
+                                                      addressController.text,
+                                                  password:
+                                                      passwordController.text,
+                                                  name: nameController.text);
+                                            }).then((value) {
+                                              VxToast.show(context,
+                                                  msg:
+                                                      "User Created Successfully",
+                                                  showTime: 5000,
+                                                  bgColor: fontGrey,
+                                                  textColor: whiteColor);
+                                              Get.offAll(() => const Home());
+                                            });
+                                          } catch (e) {
+                                            controller.loading.value = false;
+                                            controller.logout(context);
+                                            VxToast.show(
+                                              context,
+                                              msg: e.toString(),
+                                            );
+                                            // bgColor: Colors.black,
+                                            // textColor: whiteColor
+                                          }
+                                        })
+                                    .box
+                                    .shadow
+                                    .width(context.screenWidth - 50)
+                                    .make(),
+                            10.heightBox,
+                            "Or".text.color(darkFontGrey).make(),
+                            10.heightBox,
+                            ourButton(
                                     title: login,
                                     color: whiteColor,
                                     textColor: redColor,
@@ -159,12 +191,14 @@ class _SignupScreenState extends State<SignupScreen> {
                                 .shadowSm
                                 .width(context.screenWidth - 50)
                                 .make(),
-                        15.heightBox,
-                      ],
-                    ).box.padding(EdgeInsets.all(25)).make()),
-              ],
+                            15.heightBox,
+                          ],
+                        ).box.padding(EdgeInsets.all(25)).make()),
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
