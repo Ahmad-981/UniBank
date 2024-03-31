@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/consts/firebase_const.dart';
 import 'package:unibank/views/auth_screen/login_screen.dart';

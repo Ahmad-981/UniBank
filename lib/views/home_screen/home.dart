@@ -39,8 +39,8 @@ class Home extends StatelessWidget {
 
     //List 2
     var navBody = [
-      HomeScreen(),
-      FeatureScreen(),
+      const HomeScreen(),
+      const FeatureScreen(),
       const MoreScreen(),
     ];
 

@@ -6,7 +6,6 @@ import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/money_transfer_controller.dart';
 import 'package:unibank/widgets_common/dialoge_box.dart';
 import 'package:unibank/widgets_common/functions.dart';
-import 'package:unibank/widgets_common/small_button.dart';
 import 'package:unibank/widgets_common/submit_button.dart';
 
 class AddMoney extends StatelessWidget {

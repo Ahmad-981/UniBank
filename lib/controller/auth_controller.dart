@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unibank/views/auth_screen/login_screen.dart';
-import 'package:unibank/views/home_screen/home.dart';
 
 class AuthController extends GetxController {
   final emailController = TextEditingController();

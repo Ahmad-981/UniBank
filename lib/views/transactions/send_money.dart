@@ -2,7 +2,6 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/transfer_controller.dart';
 import 'package:unibank/models/user_model.dart';

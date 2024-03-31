@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/consts/firebase_const.dart';
 import 'package:unibank/consts/firestore_services.dart';
-import 'package:unibank/consts/lists.dart';
 import 'package:unibank/controller/auth_controller.dart';
 import 'package:unibank/controller/home_controller.dart';
 import 'package:unibank/views/more_screen/settings/settings.dart';
@@ -78,7 +76,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                 .text
                                 .size(15)
                                 .fontFamily(semibold)
-                                .color(Color.fromARGB(255, 87, 87, 87))
+                                .color(const Color.fromARGB(255, 87, 87, 87))
                                 .bold
                                 .make(),
                             controller.currentUser.value!.phone
@@ -86,7 +84,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                 .text
                                 .size(12)
                                 .fontFamily(regular)
-                                .color(Color.fromARGB(255, 87, 87, 87))
+                                .color(const Color.fromARGB(255, 87, 87, 87))
                                 .bold
                                 .make(),
                             20.heightBox,
@@ -100,7 +98,7 @@ class _MoreScreenState extends State<MoreScreen> {
                             ListView.separated(
                               itemCount: moreList.length,
                               shrinkWrap: true,
-                              physics: AlwaysScrollableScrollPhysics(),
+                              physics: const AlwaysScrollableScrollPhysics(),
                               itemBuilder: (BuildContext context, index) {
                                 return ListTile(
                                   title: moreList[index]
@@ -109,7 +107,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                       .color(darkFontGrey)
                                       .make()
                                       .onTap(() {
-                                    Get.to(() => SettingsScreen());
+                                    Get.to(() => const SettingsScreen());
                                   }),
                                 );
                               },

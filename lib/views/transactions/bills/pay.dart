@@ -1,7 +1,6 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/transfer_controller.dart';
 import 'package:unibank/views/home_screen/home_screen.dart';
@@ -135,7 +134,7 @@ class FinalPayPage extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 20.0),
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => HomeScreen(),
+                          Get.to(() => const HomeScreen(),
                               transition: Transition.leftToRightWithFade,
                               duration: const Duration(milliseconds: 400));
                         },

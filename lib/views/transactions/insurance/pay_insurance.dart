@@ -15,7 +15,6 @@ class PayInsurance extends StatelessWidget {
       required this.price,
       required this.name,
       required this.phone});
-  final TextEditingController _moneyController = TextEditingController();
   final TextEditingController _purposeController = TextEditingController();
   final UserController userController = Get.put(UserController());
   final String phone;

@@ -10,7 +10,7 @@ Widget ourButton2({String? title, textColor, onPress, color, icon}) {
       borderRadius: BorderRadius.circular(8),
       // Adjust the border radius as needed
     ),
-    padding: EdgeInsets.all(15),
+    padding: const EdgeInsets.all(15),
     child: Row(
       children: [
         Image.asset(

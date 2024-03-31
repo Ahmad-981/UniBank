@@ -2,14 +2,9 @@
 // import 'package:emart_app/views/auth_screen/signup_screen.dart';
 // import 'package:emart_app/views/home_screen/home.dart';
 import 'package:unibank/views/auth_screen/login_screen.dart';
-import 'package:unibank/views/auth_screen/signup_screen.dart';
-import 'package:unibank/views/home_screen/home.dart';
 import 'package:unibank/widgets_common/custom_text_field.dart';
 import 'package:unibank/widgets_common/our_button.dart';
-import 'package:unibank/widgets_common/our_button2.dart';
 import 'package:unibank/consts/consts.dart';
-import 'package:unibank/consts/consts.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,7 +74,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 title: email,
                                 controller: forgetPasswordController,
                                 obsecureText: false,
-                                icon: Icon(Icons.email_outlined,
+                                icon: const Icon(Icons.email_outlined,
                                     color: redColor)),
                             35.heightBox,
                             controller.loading.value
@@ -130,7 +125,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                     .make(),
                             10.heightBox,
                           ],
-                        ).box.padding(EdgeInsets.all(25)).make()),
+                        ).box.padding(const EdgeInsets.all(25)).make()),
                   ],
                 ),
               ),

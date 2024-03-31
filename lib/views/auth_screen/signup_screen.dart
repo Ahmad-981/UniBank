@@ -2,13 +2,9 @@
 // import 'package:emart_app/views/auth_screen/signup_screen.dart';
 // import 'package:emart_app/views/home_screen/home.dart';
 import 'package:unibank/views/auth_screen/login_screen.dart';
-import 'package:unibank/views/home_screen/home.dart';
 import 'package:unibank/widgets_common/custom_text_field.dart';
 import 'package:unibank/widgets_common/our_button.dart';
-import 'package:unibank/widgets_common/our_button2.dart';
 import 'package:unibank/consts/consts.dart';
-import 'package:unibank/consts/consts.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,26 +78,26 @@ class _SignupScreenState extends State<SignupScreen> {
                                 title: name,
                                 controller: nameController,
                                 obsecureText: false,
-                                icon: Icon(Icons.person, color: redColor)),
+                                icon: const Icon(Icons.person, color: redColor)),
                             15.heightBox,
                             customTextField(
                                 title: email,
                                 controller: emailController,
                                 obsecureText: false,
-                                icon: Icon(Icons.email_outlined,
+                                icon: const Icon(Icons.email_outlined,
                                     color: redColor)),
                             15.heightBox,
                             customTextField(
                                 title: "Phone",
                                 controller: phoneController,
                                 obsecureText: false,
-                                icon: Icon(Icons.call, color: redColor)),
+                                icon: const Icon(Icons.call, color: redColor)),
                             15.heightBox,
                             customTextField(
                               title: "Address",
                               controller: addressController,
                               obsecureText: false,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.home_outlined,
                                 color: redColor,
                               ),
@@ -111,7 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               title: password,
                               controller: passwordController,
                               obsecureText: true,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.lock_outline,
                                 color: redColor,
                               ),
@@ -206,7 +202,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                     color: whiteColor,
                                     textColor: redColor,
                                     onPress: () async {
-                                      Get.to(() => LoginScreen());
+                                      Get.to(() => const LoginScreen());
                                     })
                                 .box
                                 .shadowSm
@@ -214,7 +210,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 .make(),
                             15.heightBox,
                           ],
-                        ).box.padding(EdgeInsets.all(25)).make()),
+                        ).box.padding(const EdgeInsets.all(25)).make()),
                   ],
                 ),
               ),

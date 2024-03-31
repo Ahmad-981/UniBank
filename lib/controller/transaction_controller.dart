@@ -44,7 +44,7 @@ class TransactionController extends GetxController {
           .get();
       final List<MoneyTransfer> transactionsList = querySnapshot.docs
           .map((doc) =>
-              MoneyTransfer.fromMap(doc.data() as Map<String, dynamic>))
+              MoneyTransfer.fromMap(doc.data()))
           .toList();
       _transactions.assignAll(transactionsList);
 

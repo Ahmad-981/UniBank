@@ -11,12 +11,12 @@ Widget checkoutButton({String? title, textColor, onPress, color, icon}) {
       borderRadius:
           BorderRadius.circular(8), // Adjust the border radius as needed
     ),
-    padding: EdgeInsets.all(15),
+    padding: const EdgeInsets.all(15),
     child: Center(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.delivery_dining,
           color: whiteColor,
         ),

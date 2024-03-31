@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/electricity_controller.dart';
-import 'package:unibank/views/transactions/insurance/select_insurance.dart';
 import 'package:unibank/views/transactions/mobile_topups/pay_packages.dart';
 import 'package:unibank/widgets_common/functions.dart';
 
 class MobilePackages extends StatelessWidget {
   final ElectricityBillController controller =
       Get.put(ElectricityBillController());
-  final TextEditingController _moneyController = TextEditingController();
   MobilePackages({super.key});
 
   @override

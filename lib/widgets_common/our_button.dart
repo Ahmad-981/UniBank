@@ -10,7 +10,7 @@ Widget ourButton({String? title, textColor, onPress, color}) {
       borderRadius:
           BorderRadius.circular(10), // Adjust the border radius as needed
     ),
-    padding: EdgeInsets.all(17),
+    padding: const EdgeInsets.all(17),
     child: Center(
       child: title!.text.color(textColor).semiBold.make(),
     ),

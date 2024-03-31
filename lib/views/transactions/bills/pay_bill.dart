@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/views/transactions/bills/pay.dart';
 import 'package:unibank/widgets_common/functions.dart';

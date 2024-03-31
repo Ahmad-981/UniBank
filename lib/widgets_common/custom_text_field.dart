@@ -43,7 +43,7 @@ Widget customTextField({String? title, obsecureText, controller, icon}) {
           //   Icons.remove_red_eye_outlined,
           //   color: redColor,
           // ),
-          contentPadding: EdgeInsets.all(15),
+          contentPadding: const EdgeInsets.all(15),
           // focusedBorder: const OutlineInputBorder(
           //     borderSide: BorderSide(color: redColor))
         ),

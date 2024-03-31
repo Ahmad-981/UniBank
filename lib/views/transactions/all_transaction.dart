@@ -10,7 +10,7 @@ import 'package:unibank/widgets_common/functions.dart';
 import 'package:unibank/widgets_common/transaction_containor.dart';
 
 class AllTransactions extends StatelessWidget {
-  AllTransactions({Key? key}) : super(key: key);
+  AllTransactions({super.key});
   final TransactionController transactionController =
       Get.put(TransactionController());
 
@@ -23,7 +23,7 @@ class AllTransactions extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -480,7 +480,7 @@ class EmptyDataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 15),
       height: 100,
       width: 250,
       decoration: BoxDecoration(

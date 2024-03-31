@@ -15,11 +15,6 @@ class UserController extends GetxController {
 
   final isLoading = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    ;
-  }
 
   Future<User?> getUserByPhone(String phoneNumber) async {
     try {
@@ -392,7 +387,6 @@ class UserController extends GetxController {
         'received': false,
         'direct': true
       });
-    } catch (e) {
     } finally {
       isLoading.value = false;
     }

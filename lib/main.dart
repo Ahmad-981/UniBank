@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: Obx(
-          () => _authController.isLoggedIn.value ? HomeScreen() : LoginScreen(),
+          () => _authController.isLoggedIn.value ? const HomeScreen() : const LoginScreen(),
         ));
   }
 }

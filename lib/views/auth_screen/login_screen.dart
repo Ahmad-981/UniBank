@@ -6,10 +6,7 @@ import 'package:unibank/views/auth_screen/signup_screen.dart';
 import 'package:unibank/views/home_screen/home.dart';
 import 'package:unibank/widgets_common/custom_text_field.dart';
 import 'package:unibank/widgets_common/our_button.dart';
-import 'package:unibank/widgets_common/our_button2.dart';
 import 'package:unibank/consts/consts.dart';
-import 'package:unibank/consts/consts.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -78,14 +75,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 title: email,
                                 controller: controller.emailController,
                                 obsecureText: false,
-                                icon: Icon(Icons.email_outlined,
+                                icon: const Icon(Icons.email_outlined,
                                     color: redColor)),
                             15.heightBox,
                             customTextField(
                                 title: password,
                                 controller: controller.passwordController,
                                 obsecureText: true,
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.lock_outline,
                                   color: redColor,
                                 )),
@@ -93,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               alignment: Alignment.centerRight,
                               child: TextButton(
                                   onPressed: () {
-                                    Get.to(() => ForgetPasswordScreen());
+                                    Get.to(() => const ForgetPasswordScreen());
                                   },
                                   child: forgetPassword.text
                                       .fontFamily(semibold)
@@ -154,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             10.heightBox,
                             ourButton(
                                     title: signup,
-                                    color: Color.fromARGB(255, 240, 240, 240),
+                                    color: const Color.fromARGB(255, 240, 240, 240),
                                     textColor: redColor,
                                     onPress: () async {
                                       Get.to(() => const SignupScreen());
@@ -164,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .width(context.screenWidth - 50)
                                 .make(),
                           ],
-                        ).box.padding(EdgeInsets.all(25)).make()),
+                        ).box.padding(const EdgeInsets.all(25)).make()),
                   ],
                 ),
               ),
