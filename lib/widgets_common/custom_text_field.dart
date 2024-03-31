@@ -11,15 +11,18 @@ Widget customTextField({String? title, obsecureText, controller, icon}) {
         obscureText: obsecureText,
         decoration: InputDecoration(
           labelText: title,
+
           isDense: true,
           hintText: title,
 
-          labelStyle: TextStyle(
-              color: const Color.fromARGB(255, 124, 123, 123), fontSize: 14),
-          hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+          labelStyle: const TextStyle(
+              color: Color.fromARGB(255, 124, 123, 123),
+              fontSize: 14,
+              fontFamily: semibold),
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15), // Set the border radius
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Color.fromARGB(
                   255, 216, 214, 214), // Set the border color to light grey
             ),

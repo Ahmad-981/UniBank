@@ -42,14 +42,14 @@ class EnterAmount extends StatelessWidget {
                 padding: EdgeInsets.only(left: 8.0, bottom: 12),
                 child: Text(
                   "Enter Amount",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
+                  style: TextStyle(fontSize: 15, fontFamily: semibold),
                 ),
               ),
               Container(
-                height: 300,
+                height: 400,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: redColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -61,27 +61,37 @@ class EnterAmount extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: 200,
-                            height: 35,
-                            child: TextFormField(
-                              controller: _moneyController,
-                              keyboardType: TextInputType.number,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              decoration: const InputDecoration(
-                                hintText: 'RS',
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
+                          Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Image.asset(
+                                  "assets/images/bg.png",
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            ),
+                              SizedBox(
+                                width: 200,
+                                height: 55,
+                                child: TextFormField(
+                                  controller: _moneyController,
+                                  keyboardType: TextInputType.number,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    hintText: 'Rs.   xxx',
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        //fontWeight: FontWeight.bold,
+                                        fontFamily: regular),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           10.heightBox,
                           const Text(
@@ -111,34 +121,37 @@ class EnterAmount extends StatelessWidget {
                               )
                             ],
                           ),
-                          10.heightBox,
-                          const Text(
-                            "Purpose",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          10.heightBox,
+                          40.heightBox,
                           Container(
                             width: 200,
                             height: 1,
                             color: Colors.white,
                           ),
+                          40.heightBox,
+                          const Text(
+                            "Enter purpose of Payment:",
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: bold),
+                          ),
                           5.heightBox,
-                          SizedBox(
-                            width: 200,
-                            height: 35,
-                            child: TextFormField(
-                              controller: _purposeController,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                              decoration: const InputDecoration(
-                                hintText: 'Write Purpose of Payment',
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(
+                          Center(
+                            child: SizedBox(
+                              width: 250,
+                              height: 35,
+                              child: TextFormField(
+                                controller: _purposeController,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                                ),
+                                decoration: const InputDecoration(
+                                  hintText: '............',
+                                  border: InputBorder.none,
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    //fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -164,7 +177,7 @@ class EnterAmount extends StatelessWidget {
                           child: const Center(
                             child: Icon(
                               Icons.home,
-                              color: Colors.black,
+                              color: redColor,
                             ),
                           ),
                         ),

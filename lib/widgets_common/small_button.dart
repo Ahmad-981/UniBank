@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unibank/consts/colors.dart';
 
 class CustomSmallButton extends StatelessWidget {
   const CustomSmallButton({
@@ -15,7 +16,7 @@ class CustomSmallButton extends StatelessWidget {
       child: const Center(
         child: Text(
           "View More",
-          style: TextStyle(color: Colors.black, fontSize: 12),
+          style: TextStyle(color: redColor, fontSize: 12),
         ),
       ),
     );

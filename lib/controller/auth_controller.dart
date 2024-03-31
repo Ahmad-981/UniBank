@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:delayed_display/delayed_display.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/consts/firebase_const.dart';
@@ -9,13 +6,32 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unibank/views/auth_screen/login_screen.dart';
-import 'package:unibank/widgets_common/dialoge_box.dart';
+import 'package:unibank/views/home_screen/home.dart';
 
 class AuthController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   //final confirmPasswordController = TextEditingController();
   var loading = false.obs;
+
+  final RxBool isLoggedIn = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    checkLoggedInStatus(); // Check if the user is logged in when the controller is initialized
+  }
+
+  Future<void> checkLoggedInStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isLoggedIn.value = prefs.getBool('isLoggedIn') ?? false;
+  }
+
+  Future<void> setLoggedInStatus(bool status) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', status);
+    isLoggedIn.value = status;
+  }
 
   //SIGN IN
   Future<UserCredential?> signIn({context}) async {
@@ -25,7 +41,8 @@ class AuthController extends GetxController {
       FirebaseAuth auth = FirebaseAuth.instance;
       userCredential = await auth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      if (userCredential.user != null) {}
+      await setLoggedInStatus(true);
+      await userCredential.user!.reload();
     } on FirebaseAuthException catch (e) {
       VxToast.show(context, msg: e.toString());
     }
@@ -33,23 +50,40 @@ class AuthController extends GetxController {
   }
 
 //SignUp
-  Future<UserCredential?> signUp(
-      {email, password, context, required phonenumber}) async {
+  // Future<UserCredential?> signUp({email, password, context}) async {
+  //   UserCredential? userCredential;
+
+  //   try {
+  //     //FirebaseAuth auth = FirebaseAuth.instance;
+  //     userCredential = await auth.createUserWithEmailAndPassword(
+  //         email: email, password: password);
+  //   } on FirebaseAuthException catch (e) {
+  //     VxToast.show(context, msg: e.toString());
+  //   }
+  //   return userCredential;
+  // }
+
+  Future<UserCredential?> signUp({email, password, context}) async {
     UserCredential? userCredential;
 
     try {
-      //FirebaseAuth auth = FirebaseAuth.instance;
       userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      if (userCredential.user != null) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('phoneNumber', phonenumber);
-      }
+      // Send email verification
+      await userCredential.user!.sendEmailVerification();
+      VxToast.show(context,
+          msg: 'Verification email sent to $email. Please check your inbox.',
+          showTime: 5000,
+          bgColor: fontGrey,
+          textColor: whiteColor);
+
+      // Wait for email verification
+      await userCredential.user!.reload();
+      await setLoggedInStatus(true);
     } on FirebaseAuthException catch (e) {
       VxToast.show(context, msg: e.toString());
     }
-
     return userCredential;
   }
 
@@ -58,27 +92,17 @@ class AuthController extends GetxController {
     try {
       FirebaseAuth auth = FirebaseAuth.instance;
       await auth.sendPasswordResetEmail(email: email);
-      VxToast.show(context, msg: 'Password reset email sent successfully.');
+      VxToast.show(context,
+          msg: 'Password reset email sent successfully.',
+          showTime: 5000,
+          bgColor: fontGrey,
+          textColor: whiteColor);
     } catch (e) {
-      if (e is SocketException) {
-        // Handle internet connectivity issues here
-        Get.dialog(const DelayedDisplay(
-          delay: Duration(microseconds: 100),
-          child: CustomDialog(
-            success: false,
-            message: "It's not Us. It's Your Internet!",
-          ),
-        ));
-      } else {
-        // Handle other exceptions here
-        Get.dialog(const DelayedDisplay(
-          delay: Duration(microseconds: 100),
-          child: CustomDialog(
-            success: false,
-            message: "Tings Just Got Out of Control!",
-          ),
-        ));
-      }
+      VxToast.show(context,
+          msg: 'Error: $e',
+          showTime: 5000,
+          bgColor: fontGrey,
+          textColor: whiteColor);
     }
   }
 
@@ -98,6 +122,7 @@ class AuthController extends GetxController {
       'name': name,
       'phone': phone,
       'address': address,
+      // 'amount': '100'
     });
   }
 
@@ -105,37 +130,18 @@ class AuthController extends GetxController {
   logout(context) async {
     try {
       await auth.signOut().then((value) async {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.remove('phoneNumber');
+        await setLoggedInStatus(false);
         // if (value != null) {
-        VxToast.show(context,
-            msg: "Successfully Logout",
-            showTime: 5000,
-            bgColor: fontGrey,
-            textColor: whiteColor);
+        // VxToast.show(context,
+        //     msg: "Successfully Logout",
+        //     showTime: 5000,
+        //     bgColor: fontGrey,
+        //     textColor: whiteColor);
         Get.offAll(() => const LoginScreen());
         // }
       });
     } catch (e) {
       VxToast.show(context, msg: e.toString());
     }
-  }
-
-  Future<String> fetchPhoneNumberFromFirestore(String userId) async {
-    try {
-      DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection(userCollection) // Change this to your collection name
-          .doc(userId)
-          .get();
-      if (doc.exists) {
-        // Explicitly cast to Map<String, dynamic>
-        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-        // Access the 'phone' field from the map
-        return data['phone'] ?? '';
-      }
-    } catch (e) {
-      print('Error fetching phone number from Firestore: $e');
-    }
-    return '';
   }
 }

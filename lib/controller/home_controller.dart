@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/consts/firebase_const.dart';
+import 'package:unibank/views/auth_screen/login_screen.dart';
 
 import '../models/user_model.dart';
 
@@ -20,6 +21,7 @@ class HomeController extends GetxController {
   final homeController = TextEditingController();
   var currenItemIndex = 0.obs;
   var username = '';
+  var loading = false.obs;
 
   fetchUserDataFromFirestore() async {
     try {
@@ -46,6 +48,17 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print('Error fetching user data from Firestore: $e');
+    }
+  }
+
+  logout(context) async {
+    try {
+      await auth.signOut().then((value) {
+        Get.offAll(() => const LoginScreen());
+        // }
+      });
+    } catch (e) {
+      VxToast.show(context, msg: e.toString());
     }
   }
 

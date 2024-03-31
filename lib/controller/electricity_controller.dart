@@ -12,6 +12,96 @@ class ElectricityBillController extends GetxController {
     'NEPRA'
   ];
 
+  final List<String> insuranceProviders = [
+    'Car Insurance',
+    'Bike Insurance',
+    'Life Insurance',
+    'Health Insurance',
+    'Corona Insurance',
+    'Cargo Insurance',
+    'Home Insurance',
+  ];
+
+  final RxList<String> filteredInsuranceProvidersPrice = [
+    '1000',
+    '500',
+    '5000',
+    '2000',
+    '500',
+    '1000',
+    '5000',
+  ].obs;
+
+  final RxList<String> packages = [
+    'Weekly Super',
+    'Monthly Youtube',
+    'Monthly Snapchat',
+    'Weekly Premium Plus',
+    'Weekly Instagram',
+    'Daily',
+    'Monthly Max',
+  ].obs;
+
+  final RxList<String> packagesPrice = [
+    '480',
+    '99',
+    '99',
+    '350',
+    '100',
+    '50',
+    '1600',
+  ].obs;
+
+  final RxList<String> packagesValidity = [
+    '7',
+    '30',
+    '30',
+    '7',
+    '7',
+    '1',
+    '30',
+  ].obs;
+
+  final RxList<String> minutes = [
+    '120',
+    '00',
+    '00',
+    '150',
+    '00',
+    '50',
+    '300',
+  ].obs;
+
+  final RxList<String> messages = [
+    '200',
+    '20',
+    '20',
+    '7',
+    '7',
+    '20',
+    '300',
+  ].obs;
+
+  final RxList<String> gbs = [
+    '20',
+    '10',
+    '10',
+    '9',
+    '5',
+    '2',
+    '30',
+  ].obs;
+
+  final RxList<String> filteredInsuranceProviders = [
+    'Car Insurance',
+    'Bike Insurance',
+    'Life Insurance',
+    'Health Insurance',
+    'Corona Insurance',
+    'Cargo Insurance',
+    'Home Insurance',
+  ].obs;
+
   final RxList<String> electProviders = [
     'GEPCO',
     'FESCO',
@@ -92,6 +182,13 @@ class ElectricityBillController extends GetxController {
 
   void searchProviders(String query) {
     filteredProviders.value = electricityProviders
+        .where(
+            (provider) => provider.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
+
+  void searchInsuranceProviders(String query) {
+    filteredInsuranceProviders.value = insuranceProviders
         .where(
             (provider) => provider.toLowerCase().contains(query.toLowerCase()))
         .toList();

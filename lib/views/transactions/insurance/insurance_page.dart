@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/electricity_controller.dart';
-import 'package:unibank/views/transactions/send_money.dart';
+import 'package:unibank/views/transactions/insurance/select_insurance.dart';
 import 'package:unibank/widgets_common/functions.dart';
 
-class TransferMoney extends StatelessWidget {
+class Insurance extends StatelessWidget {
   final ElectricityBillController controller =
       Get.put(ElectricityBillController());
   final TextEditingController _moneyController = TextEditingController();
-  TransferMoney({super.key});
+  Insurance({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar("Transfer"),
+      appBar: CustomAppBar("Insurance"),
       body: Stack(
         children: [
           Positioned.fill(
@@ -30,7 +30,7 @@ class TransferMoney extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Transfer to Bank Accounts",
+                  "Select or Search Insurances",
                   style: TextStyle(fontSize: 18, fontFamily: bold),
                 ),
                 const SizedBox(height: 10),
@@ -41,7 +41,7 @@ class TransferMoney extends StatelessWidget {
                       controller: _moneyController,
                       decoration: InputDecoration(
                         //contentPadding: const EdgeInsets.all(13),
-                        hintText: 'Search or select bank',
+                        hintText: 'Type here .........',
                         hintStyle: const TextStyle(
                           fontSize: 12,
                         ),
@@ -57,7 +57,7 @@ class TransferMoney extends StatelessWidget {
                         ),
                       ),
                       onChanged: (value) {
-                        controller.searchTranferProviders(value);
+                        controller.searchInsuranceProviders(value);
                       },
                     ),
                   ),
@@ -65,7 +65,7 @@ class TransferMoney extends StatelessWidget {
                 const SizedBox(height: 10),
                 Expanded(
                   child: Obx(() => ListView.builder(
-                        itemCount: controller.filteredTransferProviders.length,
+                        itemCount: controller.filteredInsuranceProviders.length,
                         itemBuilder: (context, index) {
                           return DelayedDisplay(
                             delay: const Duration(microseconds: 100),
@@ -122,7 +122,7 @@ class TransferMoney extends StatelessWidget {
                                                   left: 0.0, top: 5),
                                               child: Text(
                                                 controller
-                                                        .filteredTransferProviders[
+                                                        .filteredInsuranceProviders[
                                                     index],
                                                 style: const TextStyle(
                                                   color: redColor,
@@ -136,9 +136,12 @@ class TransferMoney extends StatelessWidget {
                                         InkWell(
                                           onTap: () {
                                             Get.to(
-                                                () => SendMoneyTo(
-                                                      provider: controller
-                                                              .filteredTransferProviders[
+                                                () => SelectInsurance(
+                                                      phone: controller
+                                                              .filteredInsuranceProvidersPrice[
+                                                          index],
+                                                      provide: controller
+                                                              .filteredInsuranceProviders[
                                                           index],
                                                     ),
                                                 transition: Transition

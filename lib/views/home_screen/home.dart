@@ -1,4 +1,5 @@
 import 'package:unibank/consts/consts.dart';
+import 'package:unibank/views/feature_screen/feature_screen.dart';
 import 'package:unibank/views/home_screen/home_screen.dart';
 import 'package:unibank/controller/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class Home extends StatelessWidget {
     //List 2
     var navBody = [
       HomeScreen(),
-      HomeScreen(),
+      FeatureScreen(),
       const MoreScreen(),
     ];
 

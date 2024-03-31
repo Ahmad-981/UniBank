@@ -1,6 +1,7 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unibank/consts/colors.dart';
 import 'package:unibank/controller/electricity_controller.dart';
 import 'package:unibank/views/transactions/bills/pay_bill.dart';
 import 'package:unibank/widgets_common/functions.dart';
@@ -40,12 +41,12 @@ class ElectricityBill extends StatelessWidget {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: const BorderSide(
-                          color: Colors.black), // Border color when not focused
+                          color: redColor), // Border color when not focused
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: const BorderSide(
-                          color: Colors.black), // Border color when focused
+                          color: redColor), // Border color when focused
                     ),
                   ),
                   onChanged: (value) {
@@ -90,12 +91,12 @@ class ElectricityBill extends StatelessWidget {
                                           backgroundImage: const AssetImage(
                                             'assets/images/food2.PNG',
                                           ),
-                                          backgroundColor: Colors
-                                              .black, // Make background transparent
+                                          backgroundColor:
+                                              redColor, // Make background transparent
                                           child: Container(
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: Colors.black,
+                                              color: redColor,
                                             ),
                                             child: ClipRRect(
                                               borderRadius:
@@ -115,7 +116,7 @@ class ElectricityBill extends StatelessWidget {
                                           child: Text(
                                             controller.filteredProviders[index],
                                             style: const TextStyle(
-                                              color: Colors.black,
+                                              color: redColor,
                                               fontWeight: FontWeight.normal,
                                               fontSize: 18,
                                             ),
@@ -143,7 +144,7 @@ class ElectricityBill extends StatelessWidget {
                                           height: 40,
                                           width: 40,
                                           decoration: BoxDecoration(
-                                            color: Colors.black,
+                                            color: redColor,
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),

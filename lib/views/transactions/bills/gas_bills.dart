@@ -145,7 +145,7 @@ class GasBill extends StatelessWidget {
                                           height: 40,
                                           width: 40,
                                           decoration: BoxDecoration(
-                                            color: Colors.black,
+                                            color: redColor,
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),

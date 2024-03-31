@@ -8,7 +8,7 @@ Widget ourButton({String? title, textColor, onPress, color}) {
     fillColor: color,
     shape: RoundedRectangleBorder(
       borderRadius:
-          BorderRadius.circular(8), // Adjust the border radius as needed
+          BorderRadius.circular(10), // Adjust the border radius as needed
     ),
     padding: EdgeInsets.all(17),
     child: Center(

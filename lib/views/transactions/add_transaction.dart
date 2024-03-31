@@ -1,6 +1,8 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unibank/consts/colors.dart';
+import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/money_transfer_controller.dart';
 import 'package:unibank/widgets_common/dialoge_box.dart';
 import 'package:unibank/widgets_common/functions.dart';
@@ -30,10 +32,10 @@ class AddMoney extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                height: 130,
+                height: height * 0.17,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: redColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -53,6 +55,9 @@ class AddMoney extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Text(
                             "You have Spent 10% more this month\n as compared to Last one",
                             style: TextStyle(
@@ -62,7 +67,7 @@ class AddMoney extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 9),
-                          CustomSmallButton(),
+                          //CustomSmallButton(),
                         ],
                       ),
                     ),
@@ -78,7 +83,7 @@ class AddMoney extends StatelessWidget {
                         child: const Center(
                           child: Icon(
                             Icons.arrow_circle_right_outlined,
-                            color: Colors.black,
+                            color: redColor,
                           ),
                         ),
                       ),
@@ -89,25 +94,27 @@ class AddMoney extends StatelessWidget {
               DelayedDisplay(
                 delay: const Duration(microseconds: 200),
                 child: Padding(
-                  padding:
-                      EdgeInsets.only(top: height * 0.2, left: width * 0.19),
+                  padding: EdgeInsets.only(
+                      top: height * 0.2,
+                      left: width * 0.19,
+                      right: width * 0.1),
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 200,
+                        width: width * 0.6,
                         height: 60,
                         child: TextFormField(
                           controller: _moneyController,
                           keyboardType: TextInputType.number,
                           style: const TextStyle(
-                            color: shiningBlack,
+                            color: darkFontGrey,
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
                           ),
                           decoration: InputDecoration(
                             hintText: 'Enter Amount',
                             hintStyle: const TextStyle(
-                              color: Colors.black,
+                              color: Color.fromARGB(255, 109, 108, 108),
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -115,12 +122,12 @@ class AddMoney extends StatelessWidget {
                               height: 20,
                               width: 30,
                               decoration: BoxDecoration(
-                                color: Colors.black,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: const Center(
                                 child: Text(
-                                  "Pkr",
+                                  "USD",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 11,
@@ -136,7 +143,7 @@ class AddMoney extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: height * 0.3),
+              SizedBox(height: height * 0.17),
               Obx(() {
                 return DelayedDisplay(
                   delay: const Duration(microseconds: 100),

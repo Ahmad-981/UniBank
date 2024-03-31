@@ -25,7 +25,7 @@ class AllTransactions extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TransactionContainor(
                     text: "Expenses",
@@ -45,13 +45,13 @@ class AllTransactions extends StatelessWidget {
             Container(
               // Background color of the selected tab
               child: const TabBar(
-                indicatorColor: Colors.black,
+                indicatorColor: redColor,
                 // Hide the default indicator
-                labelColor: Colors.black, // Color of the selected tab label
+                labelColor: redColor, // Color of the selected tab label
                 unselectedLabelColor:
                     Colors.grey, // Color of unselected tab labels
                 splashBorderRadius: BorderRadius.all(Radius.circular(10)),
-                dividerColor: Colors.black,
+                dividerColor: redColor,
 
                 tabs: [
                   Padding(
@@ -83,7 +83,7 @@ class AllTransactions extends StatelessWidget {
                       if (transactionController.isLoading) {
                         return const Center(
                             child: SpinKitHourGlass(
-                          color: Colors.black,
+                          color: redColor,
                           size: 50,
                         ));
                       } else if (transactionController.transactions.isEmpty) {
@@ -104,10 +104,10 @@ class AllTransactions extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 70,
+                                    height: 80,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: redColor,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Row(
@@ -138,7 +138,7 @@ class AllTransactions extends StatelessWidget {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 20.0, top: 12),
+                                              left: 10.0, top: 12),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -152,7 +152,7 @@ class AllTransactions extends StatelessWidget {
                                                 style: const TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
+                                                  fontSize: 13,
                                                 ),
                                               ),
                                               Text(
@@ -162,7 +162,7 @@ class AllTransactions extends StatelessWidget {
                                                     .toString(),
                                                 style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 13,
+                                                  fontSize: 12,
                                                 ),
                                               ),
                                             ],
@@ -177,11 +177,11 @@ class AllTransactions extends StatelessWidget {
                                               right: 10.0),
                                           child: Center(
                                             child: Text(
-                                              "Rs ${formatNumber(transaction.amount)} ",
+                                              "\$${formatNumber(transaction.amount)} ",
                                               style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: 15,
                                               ),
                                             ),
                                           ),
@@ -201,7 +201,7 @@ class AllTransactions extends StatelessWidget {
                       if (transactionController.isLoading) {
                         return const Center(
                           child: SpinKitHourGlass(
-                            color: Colors.black,
+                            color: redColor,
                             size: 50,
                           ),
                         );
@@ -220,7 +220,7 @@ class AllTransactions extends StatelessWidget {
                         if (receivedTransactions.isEmpty) {
                           return const Center(
                             child: EmptyDataWidget(
-                              message: "No received transactions found",
+                              message: " No received transactions found",
                             ),
                           );
                         }
@@ -235,10 +235,10 @@ class AllTransactions extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                        color: Colors.black,
+                                        color: redColor,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Row(
@@ -269,7 +269,7 @@ class AllTransactions extends StatelessWidget {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 20.0, top: 12),
+                                                left: 10, top: 15),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -283,7 +283,7 @@ class AllTransactions extends StatelessWidget {
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
+                                                    fontSize: 14,
                                                   ),
                                                 ),
                                                 Text(
@@ -293,7 +293,7 @@ class AllTransactions extends StatelessWidget {
                                                       .toString(),
                                                   style: const TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 13,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ],
@@ -309,11 +309,11 @@ class AllTransactions extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                "Rs ${formatNumber(transaction.amount)} ",
+                                                "\$${formatNumber(transaction.amount)} ",
                                                 style: const TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
+                                                  fontSize: 15,
                                                 ),
                                               ),
                                             ),
@@ -335,7 +335,7 @@ class AllTransactions extends StatelessWidget {
                       if (transactionController.isLoading) {
                         return const Center(
                           child: SpinKitHourGlass(
-                            color: Colors.black,
+                            color: redColor,
                             size: 50,
                           ),
                         );
@@ -369,10 +369,10 @@ class AllTransactions extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Container(
-                                      height: 70,
+                                      height: 80,
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                        color: Colors.black,
+                                        color: redColor,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Row(
@@ -399,7 +399,7 @@ class AllTransactions extends StatelessWidget {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 20.0, top: 12),
+                                                left: 5, top: 15),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
@@ -413,7 +413,7 @@ class AllTransactions extends StatelessWidget {
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
+                                                    fontSize: 13,
                                                   ),
                                                 ),
                                                 Text(
@@ -423,7 +423,7 @@ class AllTransactions extends StatelessWidget {
                                                       .toString(),
                                                   style: const TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 13,
+                                                    fontSize: 12,
                                                   ),
                                                 ),
                                               ],
@@ -439,11 +439,11 @@ class AllTransactions extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                "Rs ${formatNumber(transaction.amount)} ",
+                                                "\$${formatNumber(transaction.amount)} ",
                                                 style: const TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
+                                                  fontSize: 15,
                                                 ),
                                               ),
                                             ),
@@ -480,10 +480,11 @@ class EmptyDataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
+      padding: EdgeInsets.only(left: 15),
+      height: 100,
       width: 250,
       decoration: BoxDecoration(
-          color: Colors.black, borderRadius: BorderRadius.circular(20)),
+          color: redColor, borderRadius: BorderRadius.circular(20)),
       child: Center(
         child: Text(
           message,

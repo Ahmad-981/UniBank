@@ -1,8 +1,6 @@
 // import 'package:emart_app/consts/lists.dart';
 // import 'package:emart_app/views/auth_screen/signup_screen.dart';
 // import 'package:emart_app/views/home_screen/home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:unibank/consts/firebase_const.dart';
 import 'package:unibank/views/auth_screen/forget_password.dart';
 import 'package:unibank/views/auth_screen/signup_screen.dart';
 import 'package:unibank/views/home_screen/home.dart';
@@ -62,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         .text
                         .color(const Color.fromARGB(255, 94, 92, 92))
                         .semiBold
-                        .fontFamily(semibold)
+                        .fontFamily(bold)
                         .size(17)
                         .make(),
 
@@ -80,14 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 title: email,
                                 controller: controller.emailController,
                                 obsecureText: false,
-                                icon: const Icon(Icons.email_outlined,
+                                icon: Icon(Icons.email_outlined,
                                     color: redColor)),
                             15.heightBox,
                             customTextField(
                                 title: password,
                                 controller: controller.passwordController,
                                 obsecureText: true,
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.lock_outline,
                                   color: redColor,
                                 )),
@@ -95,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               alignment: Alignment.centerRight,
                               child: TextButton(
                                   onPressed: () {
-                                    Get.to(() => const ForgetPasswordScreen());
+                                    Get.to(() => ForgetPasswordScreen());
                                   },
                                   child: forgetPassword.text
                                       .fontFamily(semibold)
@@ -120,24 +118,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                             await controller
                                                 .signIn(context: context)
                                                 .then((value) {
-                                              if (value != null) {
+                                              if (value!.user!.emailVerified) {
                                                 VxToast.show(context,
                                                     msg: "Login Successfully",
                                                     showTime: 5000,
                                                     bgColor: fontGrey,
                                                     textColor: whiteColor);
-                                                Get.to(() => const Home(),
-                                                    transition: Transition
-                                                        .leftToRightWithFade);
                                                 controller.loading.value =
                                                     false;
+                                                Get.to(() => const Home());
                                               } else {
+                                                VxToast.show(context,
+                                                    msg:
+                                                        "Your Email is not verified. Kindly verify through the mailed link",
+                                                    showTime: 5000,
+                                                    bgColor: fontGrey,
+                                                    textColor: whiteColor);
                                                 controller.loading.value =
                                                     false;
                                               }
                                             });
                                           } catch (e) {
-                                            // ignore: use_build_context_synchronously
                                             VxToast.show(context,
                                                 msg: e.toString(),
                                                 showTime: 5000,
@@ -153,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             10.heightBox,
                             ourButton(
                                     title: signup,
-                                    color: const Color.fromARGB(255, 240, 240, 240),
+                                    color: Color.fromARGB(255, 240, 240, 240),
                                     textColor: redColor,
                                     onPress: () async {
                                       Get.to(() => const SignupScreen());
@@ -163,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .width(context.screenWidth - 50)
                                 .make(),
                           ],
-                        ).box.padding(const EdgeInsets.all(25)).make()),
+                        ).box.padding(EdgeInsets.all(25)).make()),
                   ],
                 ),
               ),

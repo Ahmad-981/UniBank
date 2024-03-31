@@ -1,7 +1,6 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unibank/consts/colors.dart';
 import 'package:unibank/consts/consts.dart';
 import 'package:unibank/controller/transfer_controller.dart';
 import 'package:unibank/views/home_screen/home_screen.dart';
@@ -9,22 +8,24 @@ import 'package:unibank/widgets_common/dialoge_box.dart';
 import 'package:unibank/widgets_common/functions.dart';
 import 'package:unibank/widgets_common/submit_button.dart';
 
-class FinalPayPage extends StatelessWidget {
-  FinalPayPage(
+class PayInsurance extends StatelessWidget {
+  PayInsurance(
       {super.key,
       required this.provider,
+      required this.price,
       required this.name,
       required this.phone});
   final TextEditingController _moneyController = TextEditingController();
   final TextEditingController _purposeController = TextEditingController();
   final UserController userController = Get.put(UserController());
   final String phone;
+  final String price;
   final String name;
   final String provider;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar("Bill Pay"),
+      appBar: CustomAppBar("Insurance"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -32,17 +33,10 @@ class FinalPayPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: EdgeInsets.only(left: 8.0, top: 8),
+                padding: EdgeInsets.only(left: 8.0, top: 8, bottom: 8),
                 child: Text(
-                  "Transfer to Bank Account",
+                  "Transfer to Insurance Account",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 8.0, bottom: 12),
-                child: Text(
-                  "Enter Amount",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
                 ),
               ),
               Container(
@@ -61,9 +55,9 @@ class FinalPayPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Rs.  500",
-                            style: TextStyle(
+                          Text(
+                            "Rs.  $price",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold),
@@ -85,7 +79,8 @@ class FinalPayPage extends StatelessWidget {
                               SizedBox(
                                   height: 40,
                                   width: 40,
-                                  child: Image.asset("assets/images/bank.png")),
+                                  child: Image.asset(
+                                      "assets/images/insurance.png")),
                               10.widthBox,
                               Text(
                                 name,
@@ -135,7 +130,7 @@ class FinalPayPage extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 20.0),
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => HomeScreen(),
+                          Get.to(() => const HomeScreen(),
                               transition: Transition.leftToRightWithFade,
                               duration: const Duration(milliseconds: 400));
                         },
@@ -164,7 +159,7 @@ class FinalPayPage extends StatelessWidget {
               Center(
                 child: Obx(() => CustomSubmitButton(
                       isLoading: userController.isLoading.value,
-                      text: "Pay ",
+                      text: "Subscribe ",
                       width: MediaQuery.of(context).size.width * 1,
                       ontap: () async {
                         if (_purposeController.text.isEmpty) {
@@ -172,12 +167,17 @@ class FinalPayPage extends StatelessWidget {
                             delay: Duration(microseconds: 100),
                             child: CustomDialog(
                               success: false,
-                              message: "Write Purpose of Payment",
+                              message: "Select Date for later purposes",
                             ),
                           ));
                         } else if (_purposeController.text.isNotEmpty) {
-                          await userController.uploadPayTransaction(
-                              phone, "500", name, _purposeController.text);
+                          await userController.uploadInsuranceTransaction(
+                              phone, price, name, _purposeController.text);
+
+                          await userController.uploadSubscriptions(
+                              phone, price, name, _purposeController.text);
+                          // await userController
+                          //     .checkAndPrintRecentSubscriptions(phone);
                         } else {
                           Get.dialog(const DelayedDisplay(
                             delay: Duration(microseconds: 100),

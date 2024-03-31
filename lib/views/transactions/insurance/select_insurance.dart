@@ -1,21 +1,27 @@
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:unibank/consts/colors.dart';
 import 'package:unibank/consts/consts.dart';
+import 'package:unibank/controller/transfer_controller.dart';
+import 'package:unibank/models/user_model.dart';
 import 'package:unibank/views/transactions/bills/pay.dart';
+import 'package:unibank/views/transactions/insurance/pay_insurance.dart';
+import 'package:unibank/widgets_common/dialoge_box.dart';
 import 'package:unibank/widgets_common/functions.dart';
 import 'package:unibank/widgets_common/submit_button.dart';
 
-class PAyBill extends StatelessWidget {
-  PAyBill({super.key, required this.phone, required this.provide});
+class SelectInsurance extends StatelessWidget {
+  SelectInsurance({super.key, required this.phone, required this.provide});
   final TextEditingController _moneyController = TextEditingController();
+  final UserController userController = Get.put(UserController());
   final String provide;
   final String phone;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar("Pay"),
+      appBar: CustomAppBar("Select"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -24,19 +30,23 @@ class PAyBill extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(left: 8.0, top: 8),
               child: Text(
-                "Utility Bills",
+                "Insurance",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 8.0, bottom: 12),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, bottom: 12),
               child: Text(
-                "Specify Bill Details",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
+                "Rs $phone per month",
+                style: const TextStyle(
+                  color: Colors.black,
+                  //fontWeight: FontWeight.normal,
+                  fontSize: 20,
+                ),
               ),
             ),
             Container(
-              height: 200,
+              height: 180,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: redColor,
@@ -57,15 +67,15 @@ class PAyBill extends StatelessWidget {
                           child: TextFormField(
                             controller: _moneyController,
                             keyboardType: TextInputType.number,
-                            maxLength: 8,
+                            maxLength: 11,
                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 25,
                               fontWeight: FontWeight.bold,
                             ),
                             decoration: const InputDecoration(
-                              hintText: 'xxxxxxxx',
+                              hintText: 'xxxxxxxxxxx',
                               border: InputBorder.none,
                               hintStyle: TextStyle(
                                   color: Colors.white,
@@ -79,7 +89,7 @@ class PAyBill extends StatelessWidget {
                           height: 12,
                         ),
                         const Text(
-                          "Enter 8 Digit reference number\nwritten on your bill",
+                          "Enter 11 Digit phone number\nfor the verification",
                           style: TextStyle(
                               color: Colors.white,
                               //fontWeight: FontWeight.normal,
@@ -114,17 +124,42 @@ class PAyBill extends StatelessWidget {
             ),
             Center(
               child: CustomSubmitButton(
-                  text: "Fetch your Bill",
+                  text: "Fetch details",
                   width: MediaQuery.of(context).size.width * 1,
-                  ontap: () {
-                    Get.to(
-                        () => FinalPayPage(
-                              provider: provide,
-                              phone: phone,
-                              name: provide,
-                            ),
-                        transition: Transition.leftToRightWithFade,
-                        duration: const Duration(milliseconds: 400));
+                  ontap: () async {
+                    if (_moneyController.text.isNotEmpty &&
+                        _moneyController.text.length == 11) {
+                      User? user = await userController
+                          .getUserByPhone(_moneyController.text);
+                      if (user != null) {
+                        // User found, do something with the user data
+                        Get.to(
+                            () => PayInsurance(
+                                  provider: provide,
+                                  phone: _moneyController.text,
+                                  name: provide,
+                                  price: phone,
+                                ),
+                            transition: Transition.leftToRightWithFade,
+                            duration: const Duration(milliseconds: 400));
+                      } else {
+                        Get.dialog(const DelayedDisplay(
+                          delay: Duration(microseconds: 100),
+                          child: CustomDialog(
+                            success: false,
+                            message: "Number is wrong!",
+                          ),
+                        ));
+                      }
+                    } else {
+                      Get.dialog(const DelayedDisplay(
+                        delay: Duration(microseconds: 100),
+                        child: CustomDialog(
+                          success: false,
+                          message: "Please Enter Valid Number",
+                        ),
+                      ));
+                    }
                   }),
             )
           ],

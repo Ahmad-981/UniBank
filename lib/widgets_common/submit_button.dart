@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:unibank/consts/colors.dart';
 
 // ignore: must_be_immutable
 class CustomSubmitButton extends StatelessWidget {
@@ -24,7 +25,7 @@ class CustomSubmitButton extends StatelessWidget {
         height: 50,
         width: width * 0.9,
         decoration: BoxDecoration(
-            color: Colors.black, borderRadius: BorderRadius.circular(15)),
+            color: redColor, borderRadius: BorderRadius.circular(15)),
         child: Center(
           child: isLoading
               ? const SpinKitFadingCircle(

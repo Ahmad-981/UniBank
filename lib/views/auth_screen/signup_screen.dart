@@ -117,15 +117,15 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                             ),
                             15.heightBox,
-                            customTextField(
-                              title: "Confirm Password",
-                              controller: confirmPasswordController,
-                              obsecureText: true,
-                              icon: Icon(
-                                Icons.lock_outline,
-                                color: redColor,
-                              ),
-                            ),
+                            // customTextField(
+                            //   title: "Confirm Password",
+                            //   controller: confirmPasswordController,
+                            //   obsecureText: true,
+                            //   icon: Icon(
+                            //     Icons.lock_outline,
+                            //     color: redColor,
+                            //   ),
+                            // ),
                             25.heightBox,
                             controller.loading.value
                                 ? const CircularProgressIndicator()
@@ -139,28 +139,49 @@ class _SignupScreenState extends State<SignupScreen> {
                                             await controller
                                                 .signUp(
                                                     context: context,
-                                                    phonenumber:
-                                                        phoneController.text,
                                                     email: emailController.text,
                                                     password:
                                                         passwordController.text)
                                                 .then((value) {
-                                              return controller.storageUserData(
-                                                  email: emailController.text,
-                                                  phone: phoneController.text,
-                                                  address:
-                                                      addressController.text,
-                                                  password:
-                                                      passwordController.text,
-                                                  name: nameController.text);
+                                              if (value!.user!.emailVerified) {
+                                                return controller
+                                                    .storageUserData(
+                                                        email: emailController
+                                                            .text,
+                                                        phone: phoneController
+                                                            .text,
+                                                        address:
+                                                            addressController
+                                                                .text,
+                                                        password:
+                                                            passwordController
+                                                                .text,
+                                                        name: nameController
+                                                            .text);
+                                              } else {
+                                                controller.storageUserData(
+                                                    email: emailController.text,
+                                                    phone: phoneController.text,
+                                                    address:
+                                                        addressController.text,
+                                                    password:
+                                                        passwordController.text,
+                                                    name: nameController.text);
+                                                // Email is not verified, inform the user
+                                                // VxToast.show(context,
+                                                //     msg:
+                                                //         'Please verify your email to access the home page.');
+                                              }
                                             }).then((value) {
-                                              VxToast.show(context,
-                                                  msg:
-                                                      "User Created Successfully",
-                                                  showTime: 5000,
-                                                  bgColor: fontGrey,
-                                                  textColor: whiteColor);
-                                              Get.offAll(() => const Home());
+                                              controller.loading.value = false;
+                                              controller.logout(context);
+                                              // VxToast.show(context,
+                                              //     msg:
+                                              //         "User Created Successfully",
+                                              //     showTime: 5000,
+                                              //     bgColor: fontGrey,
+                                              //     textColor: whiteColor);
+                                              // Get.offAll(() => const Home());
                                             });
                                           } catch (e) {
                                             controller.loading.value = false;
