@@ -2,29 +2,30 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unibank/consts/consts.dart';
+import 'package:unibank/controller/money_transfer_controller.dart';
 import 'package:unibank/controller/transfer_controller.dart';
 import 'package:unibank/views/home_screen/home_screen.dart';
 import 'package:unibank/widgets_common/dialoge_box.dart';
 import 'package:unibank/widgets_common/functions.dart';
 import 'package:unibank/widgets_common/submit_button.dart';
 
-class EnterAmount extends StatelessWidget {
-  EnterAmount(
-      {super.key,
-      required this.provider,
-      required this.name,
-      required this.phone});
+class SavingLocker extends StatelessWidget {
+  SavingLocker({
+    required this.phoneNumber,
+    super.key,
+  });
   final TextEditingController _moneyController = TextEditingController();
-  final TextEditingController _purposeController = TextEditingController();
+
   final UserController userController = Get.put(UserController());
-  final String phone;
-  final String name;
-  final String provider;
+  final MoneyTransferController moneyTransferController =
+      Get.put(MoneyTransferController());
+  final String phoneNumber;
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width * 1;
     return Scaffold(
-      appBar: CustomAppBar("Money Transfer"),
+      appBar: CustomAppBar("Saving Locker"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -34,7 +35,7 @@ class EnterAmount extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(left: 8.0, top: 8),
                 child: Text(
-                  "Transfer to Bank Account",
+                  "Transfer to Saving Locker",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -46,7 +47,7 @@ class EnterAmount extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 400,
+                height: 130,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: redColor,
@@ -93,69 +94,6 @@ class EnterAmount extends StatelessWidget {
                               ),
                             ],
                           ),
-                          10.heightBox,
-                          const Text(
-                            "To",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          5.heightBox,
-                          Container(
-                            width: 200,
-                            height: 1,
-                            color: Colors.white,
-                          ),
-                          10.heightBox,
-                          Row(
-                            children: [
-                              SizedBox(
-                                  height: 40,
-                                  width: 40,
-                                  child: Image.asset("assets/images/bank.png")),
-                              10.widthBox,
-                              Text(
-                                name,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          40.heightBox,
-                          Container(
-                            width: 200,
-                            height: 1,
-                            color: Colors.white,
-                          ),
-                          40.heightBox,
-                          const Text(
-                            "Enter purpose of Payment:",
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: bold),
-                          ),
-                          5.heightBox,
-                          Center(
-                            child: SizedBox(
-                              width: width * 0.3,
-                              height: 35,
-                              child: TextFormField(
-                                controller: _purposeController,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                                decoration: const InputDecoration(
-                                  hintText: '............',
-                                  border: InputBorder.none,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    //fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -192,25 +130,22 @@ class EnterAmount extends StatelessWidget {
               Center(
                 child: Obx(() => CustomSubmitButton(
                       isLoading: userController.isLoading.value,
-                      text: "Send ",
+                      text: "Subscibe Money Saver ",
                       width: MediaQuery.of(context).size.width * 1,
                       ontap: () async {
-                        if (_purposeController.text.isEmpty) {
-                          Get.dialog(const DelayedDisplay(
-                            delay: Duration(microseconds: 100),
-                            child: CustomDialog(
-                              success: false,
-                              message: "Write Purpose of Payment",
-                            ),
-                          ));
-                        } else if (_moneyController.text.isNotEmpty &&
+                        if (_moneyController.text.isNotEmpty &&
                             int.tryParse(_moneyController.text) != null &&
                             int.parse(_moneyController.text) > 0) {
-                          await userController.uploadTransaction(
-                              phone,
+                          await userController.uploadInsuranceTransaction(
+                              phoneNumber,
                               _moneyController.text,
-                              name,
-                              _purposeController.text);
+                              "Money Saver",
+                              'saving money');
+                          await userController.uploadSubscriptions(
+                              phoneNumber,
+                              _moneyController.text,
+                              "Money Saver",
+                              'saving money');
                         } else {
                           Get.dialog(const DelayedDisplay(
                             delay: Duration(microseconds: 100),

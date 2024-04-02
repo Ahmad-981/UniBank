@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:unibank/consts/colors.dart';
+import 'package:unibank/views/notification/notification_screen.dart';
 
 const Color shiningBlack = Color(0xFF262525);
 
@@ -37,16 +38,22 @@ AppBar CustomAppBar(String title) {
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: 8.0),
-        child: Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-              color: redColor, borderRadius: BorderRadius.circular(10)),
-          child: const Center(
-            child: Icon(
-              Icons.notifications,
-              color: Colors.white,
-              size: 18,
+        child: InkWell(
+          onTap: () {
+            Get.to(() => NotificationScreen(),
+                transition: Transition.leftToRightWithFade);
+          },
+          child: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+                color: redColor, borderRadius: BorderRadius.circular(10)),
+            child: const Center(
+              child: Icon(
+                Icons.notifications,
+                color: Colors.white,
+                size: 18,
+              ),
             ),
           ),
         ),

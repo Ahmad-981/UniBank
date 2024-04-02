@@ -9,6 +9,7 @@ import 'package:unibank/widgets_common/dialoge_box.dart';
 class MoneyTransferController extends GetxController {
   final CollectionReference _transactions =
       FirebaseFirestore.instance.collection('transactions');
+
   final isLoading = false.obs;
 
   Future<void> sendMoney(String amount) async {

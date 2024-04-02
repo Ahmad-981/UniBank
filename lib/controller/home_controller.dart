@@ -10,6 +10,7 @@ import '../models/user_model.dart';
 class HomeController extends GetxController {
   Rx<User?> currentUser = Rx<User?>(null); // Make currentUser observable
   RxString? amount = RxString('0');
+  RxString? phone = RxString('0');
   @override
   void onInit() {
     fetchUserDataFromFirestore();
